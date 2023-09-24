@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class BiuUserController {
+    /**
+     * 登录
+     */
     @GetMapping("/login")
     public R login() {
         return R.out(ResponseEnum.SUCCESS, null);

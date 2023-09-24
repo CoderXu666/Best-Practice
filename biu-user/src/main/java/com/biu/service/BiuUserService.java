@@ -12,5 +12,5 @@ import com.biu.pojo.po.BiuUser;
  * @since 2023-09-24
  */
 public interface BiuUserService extends IService<BiuUser> {
-
+    String login();
 }

@@ -5,12 +5,12 @@ import com.biu.pojo.po.BiuUser;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author 徐志斌
  * @since 2023-09-24
  */
 public interface BiuUserStore extends IService<BiuUser> {
-
+    BiuUser getUserInfoById(Long id);
 }

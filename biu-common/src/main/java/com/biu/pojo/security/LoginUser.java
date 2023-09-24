@@ -1,6 +1,7 @@
 package com.biu.pojo.security;
 
 import com.biu.pojo.po.BiuUser;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,7 @@ import java.util.Collection;
  * @Version 1.0
  * @Description: LoginUser
  */
+@AllArgsConstructor
 public class LoginUser implements UserDetails {
     private BiuUser userInfo;
 
@@ -22,12 +24,12 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return userInfo.getPassWord();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return userInfo.getAccountId();
     }
 
     @Override

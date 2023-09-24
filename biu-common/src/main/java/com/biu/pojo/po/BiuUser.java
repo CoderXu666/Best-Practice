@@ -32,7 +32,7 @@ public class BiuUser implements Serializable {
      * 账号
      */
     @TableField("account_id")
-    private Long accountId;
+    private String accountId;
 
     /**
      * 密码
