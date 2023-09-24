@@ -31,6 +31,18 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--Captcha-->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+
+        <!--JJWT-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
+
         <!--MyBatis-Plus-->
         <dependency>
             <groupId>com.baomidou</groupId>

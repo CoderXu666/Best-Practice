@@ -36,7 +36,7 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
         String accountId = "xuzhibin";
         String passWord = "xuzhibin";
 
-        // 校验账户、密码是否正确（authenticate直接调用loadUserByUsername）
+        // 校验账户、密码是否正确（调用UserDetailsService#loadUserByUsername）
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountId, passWord);
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if (Objects.isNull(authenticate)) {

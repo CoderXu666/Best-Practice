@@ -24,6 +24,8 @@
         <springboot.version>2.7.16</springboot.version>
         <lombok.version>1.18.20</lombok.version>
         <mybatis.plus.version>3.5.0</mybatis.plus.version>
+        <captcha.version>2.3.2</captcha.version>
+        <jwt.version>0.9.1</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -49,11 +51,32 @@
                 <version>${mysql.version}</version>
             </dependency>
 
+            <!--Captcha-->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+
             <!--MyBatis-Plus-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
+            </dependency>
+
+            <!--Captcha-->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+
+            <!--JJWT-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
 
             <!--Lombok-->
