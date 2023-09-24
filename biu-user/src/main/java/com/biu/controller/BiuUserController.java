@@ -6,10 +6,8 @@ import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -24,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class BiuUserController {
     @Autowired
     private BiuUserService userService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 登录
@@ -34,6 +34,13 @@ public class BiuUserController {
     public R login(@RequestBody LoginUserDTO userDTO) {
         String token = userService.login(userDTO);
         return R.out(ResponseEnum.SUCCESS, token);
+    }
+
+    // 测试
+    @GetMapping("/test")
+    public R test() {
+        redisTemplate.opsForValue().set("111", "test");
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 }
 

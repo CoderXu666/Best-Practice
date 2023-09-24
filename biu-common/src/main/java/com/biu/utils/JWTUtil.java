@@ -21,16 +21,16 @@ public class JWTUtil {
     public static final String JWT_SECRET = "Docker_Biu_XuZhiBin_666";
 
     /**
-     * 根据 uid 生成 Token
+     * 根据 account_id 生成 Token
      */
-    public static String generateToken(Long uid) {
+    public static String generateToken(String accountId) {
         String JwtToken = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
                 .setSubject("Docker_Biu")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
-                .claim("uid", uid)
+                .claim("account_id", accountId)
                 .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
                 .compact();
         return JwtToken;
@@ -42,9 +42,9 @@ public class JWTUtil {
     public static Map<String, Object> resolveToken(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
         Claims claims = claimsJws.getBody();
-        Long uid = (Long) claims.get("uid");
+        String accountId = (String) claims.get("account_id");
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("uid", uid);
+        resultMap.put("account_id", accountId);
         return resultMap;
     }
 
@@ -62,8 +62,5 @@ public class JWTUtil {
             return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
     }
 }

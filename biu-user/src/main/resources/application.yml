@@ -8,3 +8,10 @@ spring:
     url: jdbc:mysql://101.42.13.186:3306/docker_biu?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: Xuzhibin123.
+  # Redis
+  redis:
+    host: 101.42.13.186
+    port: 6379
+    timeout: 20000
+    database: 6
+    password:

@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 前端静态资源， 后端放行API
      */
     private static final String[] STATIC_RESOURCE = {"/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js"};
-    private static final String[] API_URL = {"/user/login"};
+    private static final String[] API_URL = {"/user/login","/user/test"};
 
     /**
      * SpringSecurity相关配置

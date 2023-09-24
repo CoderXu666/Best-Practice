@@ -8,6 +8,7 @@ import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.po.BiuUser;
 import com.biu.pojo.security.LoginUser;
 import com.biu.service.BiuUserService;
+import com.biu.store.BiuUserStore;
 import com.biu.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,8 @@ import java.util.Objects;
  */
 @Service
 public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> implements BiuUserService {
+    @Autowired
+    private BiuUserStore userStore;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -49,7 +52,11 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
         // 获取登录用户信息
         LoginUser userInfo = (LoginUser) authenticate.getPrincipal();
 
+        // 查询一下用户信息
+        // 这里查询的意义是：store层会通过Spring Cache将用户信息进行缓存
+        userStore.getUserByAccountId(accountId);
+
         // 返回Token
-        return JWTUtil.generateToken(userInfo.getUserInfo().getId());
+        return JWTUtil.generateToken(userInfo.getUserInfo().getAccountId());
     }
 }

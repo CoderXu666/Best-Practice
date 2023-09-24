@@ -31,10 +31,23 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--Captcha-->
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
+        </dependency>
+
+        <!--使用JDK11需要额外引入该依赖-->
+        <!--JAXB被认为是JavaEE api，不再包含在Java SE 9默认的类路径。在JDK11中删除-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
         </dependency>
 
         <!--JJWT-->
