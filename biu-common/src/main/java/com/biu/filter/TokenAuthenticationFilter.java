@@ -1,8 +1,12 @@
 package com.biu.filter;
 
+import com.biu.pojo.po.BiuUser;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Author 徐志斌
@@ -24,6 +29,9 @@ import java.util.Map;
  */
 @Component
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     /**
      * 存入SecurityContextHolder原因：
      */
@@ -43,9 +51,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String accountId = (String) resultMap.get("account_id");
 
         // 获取用户信息
-
+        BiuUser userInfo = (BiuUser) redisTemplate.opsForValue().get(accountId);
+        if (Objects.isNull(userInfo)) {
+            throw new RuntimeException("用户未登录");
+        }
 
         // 存入SecurityContextHolder
+        // TODO 权限信息封装
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userInfo, null, null);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         // 放行
         filterChain.doFilter(request, response);

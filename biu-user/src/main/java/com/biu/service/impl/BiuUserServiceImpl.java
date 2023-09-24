@@ -11,6 +11,7 @@ import com.biu.service.BiuUserService;
 import com.biu.store.BiuUserStore;
 import com.biu.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,6 +31,8 @@ import java.util.Objects;
 public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> implements BiuUserService {
     @Autowired
     private BiuUserStore userStore;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -54,7 +57,8 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
 
         // 查询一下用户信息
         // 这里查询的意义是：store层会通过Spring Cache将用户信息进行缓存
-        userStore.getUserByAccountId(accountId);
+//        userStore.getUserByAccountId(accountId);
+        redisTemplate.opsForValue().set(accountId, userInfo);
 
         // 返回Token
         return JWTUtil.generateToken(userInfo.getUserInfo().getAccountId());

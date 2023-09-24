@@ -1,5 +1,7 @@
 package com.biu.config;
 
+import com.biu.filter.TokenAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,15 +18,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @Date: 2023/9/18 22:42
  * @Version 1.0
  * @Description: SpringSecurity配置类
+ * ---------------------------------------------------------------------
+ * SpringSecurity过滤器链大致流程：
+ * TokenAuthenticationFilter ——> UsernamePasswordAuthenticationFilter
+ * ——> ExceptionTranslationFilter ——> FilterSecurityInterceptor
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启注解权限
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private TokenAuthenticationFilter tokenAuthenticationFilter;
+
     /**
      * 前端静态资源， 后端放行API
      */
     private static final String[] STATIC_RESOURCE = {"/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js"};
-    private static final String[] API_URL = {"/user/login","/user/test"};
+    private static final String[] API_URL = {"/user/login", "/user/test"};
 
     /**
      * SpringSecurity相关配置
@@ -51,8 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
                 // 测试专用：全部放行
-                // .antMatchers("/**")
-                // .permitAll()
+//                 .antMatchers("/**")
+//                 .permitAll()
                 // 其他接口需要鉴权
                 .anyRequest()
                 .authenticated();
@@ -61,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
 
         // 4.添加JWT Token过滤器
-//        httpSecurity.addFilterBefore(null, UsernamePasswordAuthenticationFilter.class);
+//        httpSecurity.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         // 5.配置异常处理器
 //        httpSecurity.exceptionHandling()

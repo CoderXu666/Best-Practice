@@ -5,6 +5,7 @@ import com.biu.enums.ResponseEnum;
 import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
+import com.biu.store.BiuUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ public class BiuUserController {
     @Autowired
     private BiuUserService userService;
     @Autowired
+    private BiuUserStore userStore;
+    @Autowired
     private RedisTemplate redisTemplate;
 
     /**
@@ -39,7 +42,6 @@ public class BiuUserController {
     // 测试
     @GetMapping("/test")
     public R test() {
-        redisTemplate.opsForValue().set("111", "test");
         return R.out(ResponseEnum.SUCCESS, null);
     }
 }
