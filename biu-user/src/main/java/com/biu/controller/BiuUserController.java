@@ -2,10 +2,12 @@ package com.biu.controller;
 
 
 import com.biu.enums.ResponseEnum;
+import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,11 +27,13 @@ public class BiuUserController {
 
     /**
      * 登录
+     * ----------------------------------------------------
+     * SpringSecurity版本登录：
      */
-    @GetMapping("/login")
-    public R login() {
-        userService.login();
-        return R.out(ResponseEnum.SUCCESS, null);
+    @PostMapping("/login")
+    public R login(@RequestBody LoginUserDTO userDTO) {
+        String token = userService.login(userDTO);
+        return R.out(ResponseEnum.SUCCESS, token);
     }
 }
 

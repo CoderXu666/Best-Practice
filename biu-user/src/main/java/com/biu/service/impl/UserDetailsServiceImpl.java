@@ -20,10 +20,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private BiuUserStore userStore;
 
+    /**
+     * 校验账号密码是否正确
+     * ---------------------------------------
+     * 触发时机：authenticationManager.authenticate(authenticationToken)
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         // 查询用户信息
-        BiuUser userInfo = userStore.getUserInfoById(18809840129L);
+        BiuUser userInfo = userStore.getUserByAccountId(userName);
 
         // TODO 查询用户的权限信息
 

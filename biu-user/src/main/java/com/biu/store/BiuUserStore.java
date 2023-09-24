@@ -12,5 +12,5 @@ import com.biu.pojo.po.BiuUser;
  * @since 2023-09-24
  */
 public interface BiuUserStore extends IService<BiuUser> {
-    BiuUser getUserInfoById(Long id);
+    BiuUser getUserByAccountId(String accountId);
 }

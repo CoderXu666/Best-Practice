@@ -2,6 +2,7 @@ package com.biu.pojo.security;
 
 import com.biu.pojo.po.BiuUser;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,7 @@ import java.util.Collection;
  * @Version 1.0
  * @Description: LoginUser
  */
+@Data
 @AllArgsConstructor
 public class LoginUser implements UserDetails {
     private BiuUser userInfo;

@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.biu.enums.ResponseEnum;
 import com.biu.exeception.BiuException;
 import com.biu.mapper.BiuUserMapper;
+import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.po.BiuUser;
+import com.biu.pojo.security.LoginUser;
 import com.biu.service.BiuUserService;
+import com.biu.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,9 +35,9 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
      * 登录功能
      */
     @Override
-    public String login() {
-        String accountId = "xuzhibin";
-        String passWord = "xuzhibin";
+    public String login(LoginUserDTO userDTO) {
+        String accountId = userDTO.getAccountId();
+        String passWord = userDTO.getPassWord();
 
         // 校验账户、密码是否正确（调用UserDetailsService#loadUserByUsername）
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(accountId, passWord);
@@ -43,6 +46,10 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
             throw new BiuException(ResponseEnum.PASSWORD_ERROR);
         }
 
-        return null;
+        // 获取登录用户信息
+        LoginUser userInfo = (LoginUser) authenticate.getPrincipal();
+
+        // 返回Token
+        return JWTUtil.generateToken(userInfo.getUserInfo().getId());
     }
 }

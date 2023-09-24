@@ -20,9 +20,6 @@
     </modules>
 
     <properties>
-        <mysql.version>8.0.16</mysql.version>
-        <springboot.version>2.7.16</springboot.version>
-        <lombok.version>1.18.20</lombok.version>
         <mybatis.plus.version>3.5.0</mybatis.plus.version>
         <captcha.version>2.3.2</captcha.version>
         <jwt.version>0.9.1</jwt.version>
@@ -34,14 +31,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${springboot.version}</version>
             </dependency>
 
             <!--SpringSecurity-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
-                <version>${springboot.version}</version>
             </dependency>
 
             <!--MySQL-->
@@ -49,6 +44,14 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <!--使用JDK11需要额外引入该依赖-->
+            <!--JAXB被认为是JavaEE api，不再包含在Java SE 9默认的类路径。在JDK11中删除-->
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax-jaxb.version}</version>
             </dependency>
 
             <!--Captcha-->

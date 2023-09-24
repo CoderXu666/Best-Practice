@@ -21,9 +21,9 @@ public class BiuUserStoreImpl extends ServiceImpl<BiuUserMapper, BiuUser> implem
      * 根据id查询用户信息
      */
     @Override
-    public BiuUser getUserInfoById(Long id) {
+    public BiuUser getUserByAccountId(String accountId) {
         QueryWrapper<BiuUser> wrapper = new QueryWrapper<>();
-        wrapper.eq("id", id);
+        wrapper.eq("account_id", accountId);
         return this.getOne(wrapper);
     }
 }

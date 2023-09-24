@@ -1,6 +1,7 @@
 package com.biu.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.po.BiuUser;
 
 /**
@@ -12,5 +13,5 @@ import com.biu.pojo.po.BiuUser;
  * @since 2023-09-24
  */
 public interface BiuUserService extends IService<BiuUser> {
-    String login();
+    String login(LoginUserDTO userDTO);
 }
