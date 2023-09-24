@@ -1,7 +1,0 @@
-spring:
-  profiles:
-    active: dev
-server:
-  port: 10001
-  servlet:
-    context-path: /user
