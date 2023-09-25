@@ -31,6 +31,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--FastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
         <!--Redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

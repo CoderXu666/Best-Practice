@@ -1,15 +1,17 @@
 package com.biu.filter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.biu.pojo.po.BiuUser;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +31,8 @@ import java.util.Objects;
  */
 @Component
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired
-    private RedisTemplate redisTemplate;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 存入SecurityContextHolder原因：
@@ -51,7 +53,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String accountId = (String) resultMap.get("account_id");
 
         // 获取用户信息
-        BiuUser userInfo = (BiuUser) redisTemplate.opsForValue().get(accountId);
+        Object userObj = redisTemplate.opsForValue().get(accountId);
+        BiuUser userInfo = JSONObject.parseObject(JSON.toJSONString(userObj), BiuUser.class);
         if (Objects.isNull(userInfo)) {
             throw new RuntimeException("用户未登录");
         }

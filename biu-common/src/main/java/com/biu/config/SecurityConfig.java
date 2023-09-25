@@ -60,8 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
                 // 测试专用：全部放行
-//                 .antMatchers("/**")
-//                 .permitAll()
+                .antMatchers("/**")
+                .permitAll()
                 // 其他接口需要鉴权
                 .anyRequest()
                 .authenticated();

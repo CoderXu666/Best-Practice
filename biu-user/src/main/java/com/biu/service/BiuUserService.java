@@ -14,4 +14,6 @@ import com.biu.pojo.po.BiuUser;
  */
 public interface BiuUserService extends IService<BiuUser> {
     String login(LoginUserDTO userDTO);
+
+    Boolean logout();
 }

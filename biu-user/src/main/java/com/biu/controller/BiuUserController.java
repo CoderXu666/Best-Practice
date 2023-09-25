@@ -5,9 +5,7 @@ import com.biu.enums.ResponseEnum;
 import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
-import com.biu.store.BiuUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,10 +21,6 @@ import org.springframework.web.bind.annotation.*;
 public class BiuUserController {
     @Autowired
     private BiuUserService userService;
-    @Autowired
-    private BiuUserStore userStore;
-    @Autowired
-    private RedisTemplate redisTemplate;
 
     /**
      * 登录
@@ -37,6 +31,15 @@ public class BiuUserController {
     public R login(@RequestBody LoginUserDTO userDTO) {
         String token = userService.login(userDTO);
         return R.out(ResponseEnum.SUCCESS, token);
+    }
+
+    /**
+     * 退出登录
+     */
+    @GetMapping("/logout")
+    public R logout() {
+        userService.logout();
+        return R.out(ResponseEnum.SUCCESS, null);
     }
 
     // 测试

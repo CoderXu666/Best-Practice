@@ -57,6 +57,13 @@
                 <version>${springboot.version}</version>
             </dependency>
 
+            <!--FastJson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.61</version>
+            </dependency>
+
             <!--使用JDK11需要额外引入该依赖-->
             <!--JAXB被认为是JavaEE api，不再包含在Java SE 9默认的类路径。在JDK11中删除-->
             <dependency>
