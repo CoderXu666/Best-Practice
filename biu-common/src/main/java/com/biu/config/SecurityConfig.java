@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @Author 徐志斌
@@ -24,16 +25,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * ——> ExceptionTranslationFilter ——> FilterSecurityInterceptor
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true) // 开启注解权限
+@EnableGlobalMethodSecurity(prePostEnabled = true) // 开启注解权限 @PreAuthorize
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenAuthenticationFilter tokenAuthenticationFilter;
-
-    /**
-     * 前端静态资源， 后端放行API
-     */
-    private static final String[] STATIC_RESOURCE = {"/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js"};
-    private static final String[] API_URL = {"/user/login", "/user/test"};
 
     /**
      * SpringSecurity相关配置
@@ -45,24 +40,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 禁用HttpSession
 
         // 2.请求授权
         httpSecurity
                 .authorizeRequests()
-                // 静态资源放行
-                .antMatchers(HttpMethod.GET, STATIC_RESOURCE)
-                .permitAll()
-                // 后端接口放行
-                .antMatchers(API_URL)
+                // 匿名访问：未登录可访问
+                .antMatchers("/user/login")
+                .anonymous()
+                // 任何状态都可以访问
+                .antMatchers("/user/test")
                 .permitAll()
                 // OPTIONS请求放行
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
-                // 测试专用：全部放行
-                .antMatchers("/**")
-                .permitAll()
-                // 其他接口需要鉴权
+                // 认证后可访问
                 .anyRequest()
                 .authenticated();
 
@@ -70,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
 
         // 4.添加JWT Token过滤器
-//        httpSecurity.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         // 5.配置异常处理器
 //        httpSecurity.exceptionHandling()

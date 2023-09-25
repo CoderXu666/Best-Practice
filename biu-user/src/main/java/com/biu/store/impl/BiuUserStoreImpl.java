@@ -22,7 +22,7 @@ public class BiuUserStoreImpl extends ServiceImpl<BiuUserMapper, BiuUser> implem
      * 根据id查询用户信息
      */
     @Override
-    @Cacheable(value = "biu_user", key = "#p0")
+//    @Cacheable(value = "biu_user", key = "#p0")
     public BiuUser getUserByAccountId(String accountId) {
         QueryWrapper<BiuUser> wrapper = new QueryWrapper<>();
         wrapper.eq("account_id", accountId);
