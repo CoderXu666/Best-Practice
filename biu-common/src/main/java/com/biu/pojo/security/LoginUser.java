@@ -1,12 +1,17 @@
 package com.biu.pojo.security;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.biu.pojo.po.BiuUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Author 徐志斌
@@ -18,17 +23,33 @@ import java.util.Collection;
 @AllArgsConstructor
 public class LoginUser implements UserDetails {
     private BiuUser userInfo;
+    private List<String> permissions;
+    @JSONField(serialize = false)
+    private List<SimpleGrantedAuthority> authorities;
 
+
+    /**
+     * 授权信息
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        if (CollectionUtils.isNotEmpty(authorities)) {
+            return authorities;
+        }
+        return permissions.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
+    /**
+     * 获取密码
+     */
     @Override
     public String getPassword() {
         return userInfo.getPassWord();
     }
 
+    /**
+     * 获取账号
+     */
     @Override
     public String getUsername() {
         return userInfo.getAccountId();

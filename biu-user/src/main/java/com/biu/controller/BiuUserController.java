@@ -6,6 +6,7 @@ import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -44,6 +45,7 @@ public class BiuUserController {
 
     // 测试
     @GetMapping("/test")
+    @PreAuthorize("hasAuthority('test333')")
     public R test() {
         return R.out(ResponseEnum.SUCCESS, null);
     }

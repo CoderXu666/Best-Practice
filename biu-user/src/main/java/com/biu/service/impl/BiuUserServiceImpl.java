@@ -16,7 +16,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -59,7 +58,7 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
 
         // 查询一下用户信息
         // 这里查询的意义是：store层会通过Spring Cache将用户信息进行缓存
-        redisTemplate.opsForValue().set(accountId, loginUser.getUserInfo());
+        redisTemplate.opsForValue().set(accountId, loginUser);
 
         // 返回Token
         return JWTUtil.generateToken(loginUser.getUserInfo().getAccountId());
@@ -70,10 +69,9 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
      */
     @Override
     public Boolean logout() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Object principal = context.getAuthentication().getPrincipal();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String jsonString = JSONObject.toJSONString(principal);
-        BiuUser userInfo = JSON.parseObject(jsonString, BiuUser.class);
-        return redisTemplate.delete(userInfo.getAccountId());
+        LoginUser userInfo = JSON.parseObject(jsonString, LoginUser.class);
+        return redisTemplate.delete(userInfo.getUserInfo().getAccountId());
     }
 }

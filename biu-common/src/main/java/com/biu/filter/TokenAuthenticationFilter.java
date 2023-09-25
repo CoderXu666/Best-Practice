@@ -2,7 +2,7 @@ package com.biu.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.biu.pojo.po.BiuUser;
+import com.biu.pojo.security.LoginUser;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -54,15 +54,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         // 获取用户信息
         Object userObj = redisTemplate.opsForValue().get(accountId);
-        BiuUser userInfo = JSONObject.parseObject(JSON.toJSONString(userObj), BiuUser.class);
-        if (Objects.isNull(userInfo)) {
+        LoginUser loginUser = JSONObject.parseObject(JSON.toJSONString(userObj), LoginUser.class);
+        if (Objects.isNull(loginUser)) {
             throw new RuntimeException("用户未登录");
         }
 
         // 存入SecurityContextHolder
         // TODO 权限信息封装
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(userInfo, null, null);
+                new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         // 放行
