@@ -36,6 +36,13 @@
                 <version>${springboot.version}</version>
             </dependency>
 
+            <!--Test-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>2.7.10</version>
+            </dependency>
+
             <!--SpringSecurity-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
