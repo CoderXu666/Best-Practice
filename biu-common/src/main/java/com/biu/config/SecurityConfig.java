@@ -1,6 +1,8 @@
 package com.biu.config;
 
 import com.biu.filter.TokenAuthenticationFilter;
+import com.biu.handler.AccessDeniedPermHandler;
+import com.biu.handler.AuthenticationEntryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,14 +23,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @Description: SpringSecurity配置类
  * ---------------------------------------------------------------------
  * SpringSecurity过滤器链大致流程：
- * TokenAuthenticationFilter ——> UsernamePasswordAuthenticationFilter
- * ——> ExceptionTranslationFilter ——> FilterSecurityInterceptor
+ * 1. TokenAuthenticationFilter：处理 Token
+ * 2. UsernamePasswordAuthenticationFilter：认证、授权
+ * 3. ExceptionTranslationFilter：认证、授权异常处理
+ * 4. FilterSecurityInterceptor：
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启注解权限 @PreAuthorize
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private TokenAuthenticationFilter tokenAuthenticationFilter;
+    @Autowired
+    private AuthenticationEntryHandler authHandler;
+    @Autowired
+    private AccessDeniedPermHandler permHandler;
 
     /**
      * SpringSecurity相关配置
@@ -65,9 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         // 5.配置异常处理器
-//        httpSecurity.exceptionHandling()
-//                .accessDeniedHandler(restAccessDeniedHandler)
-//                .authenticationEntryPoint(restAuthenticationEntryPoint);
+        httpSecurity.exceptionHandling()
+                .accessDeniedHandler(permHandler)
+                .authenticationEntryPoint(authHandler);
     }
 
     /**

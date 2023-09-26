@@ -15,5 +15,14 @@ import java.util.List;
  * @since 2023-09-26
  */
 public interface SysMenuMapper extends BaseMapper<SysMenu> {
+    /**
+     * 根据user_id查询用户权限
+     */
+    @Select("        SELECT DISTINCT m.perms\n" +
+            "        FROM sys_user_role AS ur\n" +
+            "                 LEFT JOIN sys_role AS r ON ur.role_id = r.id\n" +
+            "                 LEFT JOIN sys_role_menu AS rm ON ur.role_id = rm.role_id\n" +
+            "                 LEFT JOIN sys_menu AS m ON m.id = rm.menu_id\n" +
+            "        WHERE user_id = #{userId}")
     List<String> getPermsByUserId(Long userId);
 }

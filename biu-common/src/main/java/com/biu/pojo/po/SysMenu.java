@@ -38,18 +38,6 @@ public class SysMenu implements Serializable {
     private String menuName;
 
     /**
-     * 路由路径
-     */
-    @TableField("path")
-    private String path;
-
-    /**
-     * 状态（0：正常，1：不可用）
-     */
-    @TableField("status")
-    private Boolean status;
-
-    /**
      * 权限标识
      */
     @TableField("perms")

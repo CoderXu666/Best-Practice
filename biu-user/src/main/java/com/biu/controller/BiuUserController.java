@@ -45,7 +45,7 @@ public class BiuUserController {
 
     // 测试
     @GetMapping("/test")
-    @PreAuthorize("hasAuthority('test333')")
+    @PreAuthorize("hasAuthority('sys:test')")
     public R test() {
         return R.out(ResponseEnum.SUCCESS, null);
     }

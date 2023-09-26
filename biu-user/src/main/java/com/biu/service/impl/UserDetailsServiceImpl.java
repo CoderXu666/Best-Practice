@@ -1,5 +1,6 @@
 package com.biu.service.impl;
 
+import com.biu.mapper.SysMenuMapper;
 import com.biu.pojo.po.BiuUser;
 import com.biu.pojo.security.LoginUser;
 import com.biu.store.BiuUserStore;
@@ -9,8 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,20 +23,20 @@ import java.util.List;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private BiuUserStore userStore;
+    @Resource
+    private SysMenuMapper menuMapper;
 
     /**
-     * 校验账号密码是否正确
-     * ---------------------------------------
+     * 校验账号密码，封装权限
      * 触发时机：authenticationManager.authenticate(authenticationToken)
      */
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException {
         // 查询用户信息
-        BiuUser userInfo = userStore.getUserByAccountId(userName);
+        BiuUser userInfo = userStore.getUserByAccountId(accountId);
 
-        // TODO 查询用户的权限信息
-        List<String> permissions = new ArrayList<>(Arrays.asList("test", "admin"));
-
+        // 查询用户的权限信息
+        List<String> permissions = menuMapper.getPermsByUserId(userInfo.getId());
 
         // TODO 数据封装成UserDetails返回
         return new LoginUser(userInfo, permissions, null);
