@@ -22,7 +22,7 @@ public class CodeGenerator {
         dataSource.setDriverName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://101.42.13.186:3306/docker_biu?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         dataSource.setUsername("root");
-        dataSource.setPassword("Xuzhibin123.");
+        dataSource.setPassword("");
         autoGenerator.setDataSource(dataSource);
         /**
          * 第二步：设置全局配置
@@ -42,7 +42,7 @@ public class CodeGenerator {
          */
         PackageConfig packageConfig = new PackageConfig();
         packageConfig.setParent("com.biu");
-        packageConfig.setEntity("pojo");
+        packageConfig.setEntity("pojo。po");
         packageConfig.setMapper("mapper");
         autoGenerator.setPackageInfo(packageConfig);
 
@@ -50,7 +50,7 @@ public class CodeGenerator {
          * 第四步：   策略设置
          */
         StrategyConfig strategyConfig = new StrategyConfig();
-        strategyConfig.setInclude("biu_user");
+        strategyConfig.setInclude("sys_user_role");
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setEntityLombokModel(true);
