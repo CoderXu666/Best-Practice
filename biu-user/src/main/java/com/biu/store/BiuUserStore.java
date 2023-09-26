@@ -13,4 +13,6 @@ import com.biu.pojo.po.BiuUser;
  */
 public interface BiuUserStore extends IService<BiuUser> {
     BiuUser getUserByAccountId(String accountId);
+
+    Boolean saveUser(BiuUser user);
 }

@@ -3,6 +3,7 @@ package com.biu.controller;
 
 import com.biu.enums.ResponseEnum;
 import com.biu.pojo.dto.LoginUserDTO;
+import com.biu.pojo.dto.RegisterUserDTO;
 import com.biu.response.R;
 import com.biu.service.BiuUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,16 @@ public class BiuUserController {
     private BiuUserService userService;
 
     /**
+     * 注册
+     */
+    @PostMapping("/register")
+    public R register(@RequestBody RegisterUserDTO userDTO) {
+        userService.register(userDTO);
+        return R.out(ResponseEnum.SUCCESS, null);
+    }
+
+    /**
      * 登录
-     * ----------------------------------------------------
-     * SpringSecurity版本登录：
      */
     @PostMapping("/login")
     public R login(@RequestBody LoginUserDTO userDTO) {

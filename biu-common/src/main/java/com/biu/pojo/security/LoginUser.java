@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 public class LoginUser implements UserDetails {
     private BiuUser userInfo;
     private List<String> permissions;
-    @JSONField(serialize = false)
     private List<SimpleGrantedAuthority> authorities;
 
 

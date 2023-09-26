@@ -29,6 +29,7 @@ public enum ResponseEnum {
     TOKEN_NOT_EXIST(5000, "用户Token信息不存在"),
 
     USER_NOT_EXIST(5000, "未查询到当前用户相关信息"),
+    USER_NOT_LOGIN(5000, "当前账号未登录"),
     USER_EXIST(5000, "当前账号已存在，换个试试"),
     USER_LONG(5000, "当前账号长度太长！"),
     USER_SHORT(5000, "当前账号长度太短！"),

@@ -22,11 +22,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @Version 1.0
  * @Description: SpringSecurity配置类
  * ---------------------------------------------------------------------
- * SpringSecurity过滤器链大致流程：
+ * SpringSecurity过滤器链大致流程（默认16个Filter）：
  * 1. TokenAuthenticationFilter：处理 Token
  * 2. UsernamePasswordAuthenticationFilter：认证、授权
- * 3. ExceptionTranslationFilter：认证、授权异常处理
- * 4. FilterSecurityInterceptor：
+ * 3. ExceptionTranslationFilter：异常过滤器，用来处理在认证授权过程中抛出的异常
+ * 4. FilterSecurityInterceptor：权限过滤器, 基本位于过滤链的最底部
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启注解权限 @PreAuthorize
@@ -76,6 +76,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.exceptionHandling()
                 .accessDeniedHandler(permHandler)
                 .authenticationEntryPoint(authHandler);
+
+        // 6.SpringSecurity跨域配置
+        httpSecurity.cors();
     }
 
     /**

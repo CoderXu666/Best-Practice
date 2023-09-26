@@ -2,6 +2,8 @@ package com.biu.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.biu.enums.ResponseEnum;
+import com.biu.exeception.BiuException;
 import com.biu.pojo.security.LoginUser;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -34,15 +36,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
-    /**
-     * 存入SecurityContextHolder原因：
-     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 获取Token
         String token = request.getHeader("token");
 
-        // 判断Token是否存在（这里放行是因为后续还有Filter会处理这里认证状态，不需要在这里抛出异常）
+        // 不携带Token放过（这里放行是因为后续还有Filter会处理这里认证状态，不需要在这里抛出异常）
         if (StringUtils.isEmpty(token)) {
             filterChain.doFilter(request, response);
             return;
@@ -52,20 +51,19 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         Map<String, Object> resultMap = JWTUtil.resolveToken(token);
         String accountId = (String) resultMap.get("account_id");
 
-        // 获取用户信息
+        // Redis中获取用户信息（登陆成功会对LoginUser进行缓存）
         Object userObj = redisTemplate.opsForValue().get(accountId);
         LoginUser loginUser = JSONObject.parseObject(JSON.toJSONString(userObj), LoginUser.class);
         if (Objects.isNull(loginUser)) {
-            throw new RuntimeException("用户未登录");
+            throw new BiuException(ResponseEnum.USER_NOT_LOGIN);
         }
 
-        // 存入SecurityContextHolder
-        // TODO 权限信息封装
+        // 认证、授权存入SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-        // 放行
+        // 放行Filter
         filterChain.doFilter(request, response);
     }
 }

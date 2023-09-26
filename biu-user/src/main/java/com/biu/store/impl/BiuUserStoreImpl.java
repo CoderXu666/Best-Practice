@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.biu.mapper.BiuUserMapper;
 import com.biu.pojo.po.BiuUser;
 import com.biu.store.BiuUserStore;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,5 +26,13 @@ public class BiuUserStoreImpl extends ServiceImpl<BiuUserMapper, BiuUser> implem
         QueryWrapper<BiuUser> wrapper = new QueryWrapper<>();
         wrapper.eq("account_id", accountId);
         return this.getOne(wrapper);
+    }
+
+    /**
+     * 保存账号
+     */
+    @Override
+    public Boolean saveUser(BiuUser user) {
+        return this.save(user);
     }
 }

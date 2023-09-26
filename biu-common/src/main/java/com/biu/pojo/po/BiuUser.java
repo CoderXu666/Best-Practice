@@ -1,6 +1,7 @@
 package com.biu.pojo.po;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import java.util.Date;
  * @since 2023-09-24
  */
 @Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @TableName("biu_user")
 public class BiuUser implements Serializable {
