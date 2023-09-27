@@ -46,12 +46,9 @@
 
 - Linux
 - Shell
-- Nginx + LVS + KeepAlive
+- Nginx(LVS + KeepAlive)
 - Maven
-- Jenkins
-- Docker
-- Prometheus
-- Grafana
+- Docker(Dockerfile + DockerCompose)
 
 ### 4、加入我们
 

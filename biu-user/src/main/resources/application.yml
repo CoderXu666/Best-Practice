@@ -15,4 +15,3 @@ spring:
     timeout: 20000
     database: 6
     password:
-
