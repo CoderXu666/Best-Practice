@@ -23,15 +23,11 @@
 - Redisson
 - MyBatis-Plus
 - SpringBoot
-- SpringCloud
-    - Nacos
-    - Feign
-    - Seata
+- SpringSecurity + JWT
 - WebSocket
 - ElasticSearch + Kibana + LogStash
 - MinIO
 - Kafka
-- JWT
 
 #### 前端
 
@@ -45,9 +41,6 @@
 - Axios
 - node.js
 - npm
-- iconfont
-- js-cookie
-- json-bigint
 
 #### 运维
 
@@ -57,11 +50,8 @@
 - Maven
 - Jenkins
 - Docker
-- SonarQube
-- Harbor
 - Prometheus
 - Grafana
-- Kubernetes（暂不考虑，服务器资源太贵....）
 
 ### 4、加入我们
 
