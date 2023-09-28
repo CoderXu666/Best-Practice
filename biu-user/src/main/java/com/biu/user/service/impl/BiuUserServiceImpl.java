@@ -1,4 +1,4 @@
-package com.biu.service.impl;
+package com.biu.user.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -6,13 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.biu.adapter.UserAdapter;
 import com.biu.enums.ResponseEnum;
 import com.biu.exeception.BiuException;
-import com.biu.mapper.BiuUserMapper;
+import com.biu.user.mapper.BiuUserMapper;
 import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.dto.RegisterUserDTO;
 import com.biu.pojo.po.BiuUser;
 import com.biu.pojo.security.LoginUser;
-import com.biu.service.BiuUserService;
-import com.biu.store.BiuUserStore;
+import com.biu.user.service.BiuUserService;
+import com.biu.user.store.BiuUserStore;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;

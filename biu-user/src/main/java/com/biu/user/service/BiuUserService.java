@@ -1,4 +1,4 @@
-package com.biu.service;
+package com.biu.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.biu.pojo.dto.LoginUserDTO;

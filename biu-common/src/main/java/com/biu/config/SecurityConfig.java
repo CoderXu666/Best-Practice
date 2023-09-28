@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 // 匿名访问：未登录可访问
-                .antMatchers("/user/login")
+                .antMatchers("/user/login","/container/test")
                 .anonymous()
                 // 任何状态都可以访问
                 .antMatchers("/user/test")

@@ -1,10 +1,10 @@
-package com.biu.store.impl;
+package com.biu.user.store.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.biu.mapper.BiuUserMapper;
+import com.biu.user.mapper.BiuUserMapper;
 import com.biu.pojo.po.BiuUser;
-import com.biu.store.BiuUserStore;
+import com.biu.user.store.BiuUserStore;
 import org.springframework.stereotype.Service;
 
 /**

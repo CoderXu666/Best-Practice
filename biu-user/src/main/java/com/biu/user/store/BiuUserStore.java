@@ -1,4 +1,4 @@
-package com.biu.store;
+package com.biu.user.store;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.biu.pojo.po.BiuUser;

@@ -1,4 +1,4 @@
-package com.biu.mapper;
+package com.biu.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.biu.pojo.po.SysMenu;

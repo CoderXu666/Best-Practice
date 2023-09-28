@@ -25,6 +25,7 @@
         <mybatis.plus.version>3.5.0</mybatis.plus.version>
         <captcha.version>2.3.2</captcha.version>
         <jwt.version>0.9.1</jwt.version>
+        <docker.version>3.2.5</docker.version>
     </properties>
 
     <dependencyManagement>
@@ -36,11 +37,11 @@
                 <version>${springboot.version}</version>
             </dependency>
 
-            <!--Test-->
+            <!--Docker-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-test</artifactId>
-                <version>2.7.10</version>
+                <groupId>com.github.docker-java</groupId>
+                <artifactId>docker-java</artifactId>
+                <version>${docker.version}</version>
             </dependency>
 
             <!--SpringSecurity-->
