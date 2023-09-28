@@ -56,12 +56,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 匿名访问：未登录可访问
                 .antMatchers("/user/login","/container/test")
                 .anonymous()
+
                 // 任何状态都可以访问
                 .antMatchers("/user/test")
                 .permitAll()
                 // OPTIONS请求放行
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
+
+
+                // FIXME 测试专用：全部放行
+                .antMatchers("/**")
+                .permitAll()
+
+
                 // 认证后可访问
                 .anyRequest()
                 .authenticated();

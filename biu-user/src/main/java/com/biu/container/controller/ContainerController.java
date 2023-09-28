@@ -24,7 +24,24 @@ public class ContainerController {
     @Autowired
     private DockerClient dockerClient;
 
-    @GetMapping("/test")
+    /**
+     * 创建容器
+     */
+
+
+    /**
+     * 启动容器
+     */
+    @GetMapping("/start")
+    public R startContainer(String containerId) {
+        dockerClient.startContainerCmd(containerId).exec();
+        return R.out(ResponseEnum.SUCCESS, null);
+    }
+
+    /**
+     * 查询容器列表
+     */
+    @GetMapping("/list")
     public R searchContainers() {
         ListContainersCmd listContainersCmd = dockerClient.listContainersCmd().withShowAll(true);
         List<Container> containers = listContainersCmd.exec();
