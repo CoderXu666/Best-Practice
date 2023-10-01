@@ -17,6 +17,7 @@
     <modules>
         <module>common</module>
         <module>security-test</module>
+        <module>juc</module>
     </modules>
 
     <properties>
