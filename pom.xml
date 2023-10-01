@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.biu</groupId>
-    <artifactId>DockerBiu</artifactId>
+    <artifactId>CodeDemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DockerBiu</name>
+    <name>CodeDemo</name>
     <packaging>pom</packaging>
 
     <parent>
@@ -15,8 +15,8 @@
     </parent>
 
     <modules>
-        <module>biu-common</module>
-        <module>biu-user</module>
+        <module>common</module>
+        <module>security-test</module>
     </modules>
 
     <properties>
