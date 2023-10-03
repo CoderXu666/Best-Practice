@@ -24,7 +24,7 @@ public class MethodTest4 {
             public void run() {
                 log.debug("t1线程进入睡眠状态....");
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     log.debug("t1醒来....");
                     e.printStackTrace();
@@ -38,5 +38,6 @@ public class MethodTest4 {
         Thread.sleep(1000);
         log.debug("t1的打断操作开始.....");
         t1.interrupt();
+        log.debug("t1打断标记：{}", t1.isInterrupted()); // 打断未睡眠线程，true；打断睡眠线程，false
     }
 }
