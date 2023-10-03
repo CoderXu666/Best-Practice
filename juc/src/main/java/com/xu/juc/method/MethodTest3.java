@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Author 徐志斌
  * @Date: 2023/10/2 17:05
  * @Version 1.0
- * @Description: sleep方法
+ * @Description: sleep
  */
 @Slf4j
 public class MethodTest3 {
@@ -32,10 +32,5 @@ public class MethodTest3 {
         log.debug("t1线程状态：{}", t1.getState());
         Thread.sleep(500); // 不加这行，线程状态为Runnable
         log.debug("t1线程状态：{}", t1.getState());
-
-        /**
-         * 打断sleep线程
-         */
-
     }
 }
