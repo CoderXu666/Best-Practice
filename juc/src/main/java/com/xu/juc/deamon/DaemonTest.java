@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Author 徐志斌
  * @Date: 2023/10/5 10:14
  * @Version 1.0
- * @Description: 守护线程
+ * @Description: 守护线程(例如 GC线程,程序停止了,它也会跟随销毁)
  */
 @Slf4j
 public class DaemonTest {
