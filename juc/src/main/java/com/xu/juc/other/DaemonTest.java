@@ -1,4 +1,4 @@
-package com.xu.juc.deamon;
+package com.xu.juc.other;
 
 import lombok.extern.slf4j.Slf4j;
 
