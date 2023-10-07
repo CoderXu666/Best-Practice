@@ -6,11 +6,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.biu.adapter.UserAdapter;
 import com.biu.enums.ResponseEnum;
 import com.biu.exeception.BiuException;
-import com.biu.user.mapper.BiuUserMapper;
 import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.dto.RegisterUserDTO;
 import com.biu.pojo.po.BiuUser;
-import com.biu.pojo.security.LoginUser;
+import com.biu.user.pojo.LoginUser;
+import com.biu.user.mapper.BiuUserMapper;
 import com.biu.user.service.BiuUserService;
 import com.biu.user.store.BiuUserStore;
 import com.biu.utils.JWTUtil;
@@ -60,7 +60,7 @@ public class BiuUserServiceImpl extends ServiceImpl<BiuUserMapper, BiuUser> impl
         }
         // 获取登录用户信息
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-        // 查询一下用户信息
+        // 登录用户信息缓存到Redis
         redisTemplate.opsForValue().set(userDTO.getAccountId(), loginUser);
         // 返回Token
         return JWTUtil.generateToken(loginUser.getUserInfo().getAccountId());

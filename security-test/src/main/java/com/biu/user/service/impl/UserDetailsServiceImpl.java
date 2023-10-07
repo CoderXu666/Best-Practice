@@ -2,7 +2,7 @@ package com.biu.user.service.impl;
 
 import com.biu.user.mapper.SysMenuMapper;
 import com.biu.pojo.po.BiuUser;
-import com.biu.pojo.security.LoginUser;
+import com.biu.user.pojo.LoginUser;
 import com.biu.user.store.BiuUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

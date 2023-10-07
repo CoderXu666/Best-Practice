@@ -1,4 +1,4 @@
-package com.biu.pojo.security;
+package com.biu.user.pojo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;

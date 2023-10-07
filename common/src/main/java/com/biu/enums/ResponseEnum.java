@@ -21,10 +21,6 @@ public enum ResponseEnum {
     NO_STRATEGY_HANDLER(50, "Map中不存在当前策略类"),
     FILE_NOT_EXIST(50, "当前上传文件不存在"),
 
-
-    /**
-     * 自定义
-     */
     TOKEN_EXPIRED(5000, "用户Token已失效，请重新登录"),
     TOKEN_NOT_EXIST(5000, "用户Token信息不存在"),
 
