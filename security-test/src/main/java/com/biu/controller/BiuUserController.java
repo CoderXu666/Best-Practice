@@ -1,11 +1,11 @@
-package com.biu.user.controller;
+package com.biu.controller;
 
 
 import com.biu.enums.ResponseEnum;
 import com.biu.pojo.dto.LoginUserDTO;
 import com.biu.pojo.dto.RegisterUserDTO;
 import com.biu.response.R;
-import com.biu.user.service.BiuUserService;
+import com.biu.service.BiuUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

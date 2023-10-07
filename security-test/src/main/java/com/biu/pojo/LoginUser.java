@@ -1,6 +1,5 @@
-package com.biu.user.pojo;
+package com.biu.pojo;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.biu.pojo.po.BiuUser;
 import lombok.AllArgsConstructor;

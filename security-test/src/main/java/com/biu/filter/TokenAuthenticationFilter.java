@@ -1,10 +1,10 @@
-package com.biu.user.filter;
+package com.biu.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.biu.enums.ResponseEnum;
 import com.biu.exeception.BiuException;
-import com.biu.user.pojo.LoginUser;
+import com.biu.pojo.LoginUser;
 import com.biu.utils.JWTUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;

@@ -1,4 +1,4 @@
-package com.biu.user.mapper;
+package com.biu.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.biu.pojo.po.BiuUser;

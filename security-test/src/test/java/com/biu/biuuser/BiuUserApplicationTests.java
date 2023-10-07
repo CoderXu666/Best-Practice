@@ -1,6 +1,6 @@
 package com.biu.biuuser;
 
-import com.biu.user.mapper.SysMenuMapper;
+import com.biu.mapper.SysMenuMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;

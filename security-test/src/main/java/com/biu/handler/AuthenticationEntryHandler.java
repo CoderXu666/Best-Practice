@@ -1,10 +1,10 @@
-package com.biu.user.handler;
+package com.biu.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.biu.enums.ResponseEnum;
 import com.biu.response.R;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
@@ -14,15 +14,15 @@ import java.io.IOException;
 
 /**
  * @Author: 徐志斌
- * @CreateTime: 2023-09-26  13:10
- * @Description: 授权异常处理器
+ * @CreateTime: 2023-09-26  13:03
+ * @Description: 认证异常处理器
  * @Version: 1.0
  */
 @Component
-public class AccessDeniedPermHandler implements AccessDeniedHandler {
+public class AuthenticationEntryHandler implements AuthenticationEntryPoint {
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        R r = R.out(ResponseEnum.FAIL, "用户权限不足！");
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        R r = R.out(ResponseEnum.FAIL, "用户认证失败");
         response.setStatus(200);
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");

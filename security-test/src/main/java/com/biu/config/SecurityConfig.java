@@ -1,8 +1,8 @@
-package com.biu.user.config;
+package com.biu.config;
 
-import com.biu.user.filter.TokenAuthenticationFilter;
-import com.biu.user.handler.AccessDeniedPermHandler;
-import com.biu.user.handler.AuthenticationEntryHandler;
+import com.biu.filter.TokenAuthenticationFilter;
+import com.biu.handler.AccessDeniedPermHandler;
+import com.biu.handler.AuthenticationEntryHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
